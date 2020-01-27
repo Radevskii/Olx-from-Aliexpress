@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>    
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 style="text-align: center;">Hi, {{ user.name}}!</h1>
+        <p style="text-align: center;"><button onclick="location.href = '/login'">Login</button></p>
+        <p style="text-align: center;"><button onclick="location.href = '/register'">Register</button></p>
+    </body>
+</html>

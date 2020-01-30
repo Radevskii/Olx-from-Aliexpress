@@ -13,10 +13,15 @@ class ad:
         self.date = date
         self.is_active = is_active
         self.buyer = buyer
-
         self.values = (
-            self.id_ad, self.name_ad, self.info_ad, self.price, self.user_id, self.date, self.is_active, self.buyer
+
+        self.id_ad, self.name_ad, self.info_ad, self.price, self.user_id, self.date, self.is_active, self.buyer
         )
+
+        self.editing = (
+             self.name_ad, self.info_ad, self.price
+        )
+
 
     def add_ad(self):
         with DB() as db:
@@ -27,6 +32,15 @@ class ad:
                 ''', self.values
             )
 
+            return self
+
+    def edit_ad(self):
+        with DB() as db:
+            db.execute(
+                '''
+                    UPDATE ads SET name_ad = ?, info_ad = ?, price = ? 
+                ''', self.editing
+            )
             return self
 
     @staticmethod
@@ -43,6 +57,7 @@ class ad:
         with DB() as db:
             rows = db.execute('SELECT * FROM ads').fetchall()
             return [ad(*row) for row in rows]
+
 
     @staticmethod
     def find_user_name(user_id):

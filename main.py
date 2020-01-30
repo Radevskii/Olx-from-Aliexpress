@@ -36,8 +36,6 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     elif request.method == "POST":
-        request.form['email'],
-        request.form['password']
         return redirect("/{}/".format(user.get_user_id(request.form['email'])))
 
 
@@ -56,6 +54,23 @@ def add_ad(id):
         ad(*values).add_ad()
         return redirect('/{}/'.format(id))
 
+
+@app.route('/<int:id>/edit_ad/', methods=['GET', 'POST'])
+def edit_ads(id):
+    if request.method == "GET":
+        return render_template("edit_ad.html", user=user.get_user(id))
+    elif request.method =="POST":
+        values = (
+            None,
+            request.form['name_ad'],
+            request.form['info_ad'],
+            request.form['price'],
+            id
+        )
+        ad(*values).edit_ad()
+        return redirect('/{}/'.format(id))
+
+
 @app.route('/<int:id>/delete', methods=['POST'])
 def delete_post(id):
     post = ad.find(id)
@@ -63,6 +78,10 @@ def delete_post(id):
     post.delete()
 
     return render_template("index.html", user=User_name, ads = ad.all())
+
+
+
+
 
 @app.route("/<int:id>/")
 def print_hello(id):

@@ -27,7 +27,8 @@ conn.cursor().execute(
         date TEXT,
         is_active INTEGER,
         buyer INTEGER,
-        FOREIGN KEY (user_id) REFERENCES users(id)
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (buyer) REFERENCES users(id)
   
     )
     '''

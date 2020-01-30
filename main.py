@@ -56,6 +56,14 @@ def add_ad(id):
         ad(*values).add_ad()
         return redirect('/{}/'.format(id))
 
+@app.route('/<int:id>/delete', methods=['POST'])
+def delete_post(id):
+    post = ad.find(id)
+    User_name = user.get_user(post.user_id)
+    post.delete()
+
+    return render_template("index.html", user=User_name, ads = ad.all())
+
 @app.route("/<int:id>/")
 def print_hello(id):
     User_name = user.get_user(id)

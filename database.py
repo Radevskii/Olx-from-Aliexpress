@@ -7,7 +7,7 @@ conn.cursor().execute('''
 CREATE TABLE IF NOT EXISTS users
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT ,
+        name TEXT,
         email TEXT UNIQUE,
         password TEXT,
         phone_number INTEGER,
@@ -22,11 +22,11 @@ conn.cursor().execute(
         id_ad INTEGER PRIMARY KEY AUTOINCREMENT,
         name_ad TEXT,
         info_ad TEXT,
-        price INTEGER, 
+        price INTEGER,
+        user_id INTEGER, 
         date TEXT,
         is_active INTEGER,
-        buyer INTEGER
-        user_id INTEGER,
+        buyer INTEGER,
         FOREIGN KEY (user_id) REFERENCES users(id)
   
     )

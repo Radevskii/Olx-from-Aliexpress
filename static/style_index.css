@@ -1,0 +1,42 @@
+button {
+    background-color: rgba(214,32,15,0.4);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    border-style: solid;
+    border-color: #00bacf;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.headers {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#btns {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+#adusrnm {
+    background-color:rgba(123,154,98,0.2);
+    width: 10%;
+}
+
+button:hover {
+    opacity: 0.8;
+} 
+
+.info{
+    padding: 1%;
+    border-style: solid;
+    border-color: dodgerblue;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+div{
+    background-color:rgba(40, 113, 161, 0.589);
+}

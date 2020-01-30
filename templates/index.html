@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style_index.css')}}" />
+    </head>
+
+    <body>
+        <div class="info">
+            <div>
+                {% if user!=None %}
+                <h1 class="headers">Welcome, {{ user.name }}!</h1>
+                {%endif%}
+                <div id="btns">
+                    {% if user == None %}
+                    <button onclick="location.href = '/login'">Login</button>
+                    {%endif%}
+                    {%if user==None%}
+                    <button onclick="location.href = '/register'">Register</button>
+                    {%endif%}
+                    {%if user != None%}
+                    <button onclick="location.href = '/'">Log out</button>
+                    <button onclick="location.href = '/{{user.id}}/new_ad/'">Add ad</button></p>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+
+        {%for ad in ads %}
+        <div class="info">
+          <br>
+          <b>Продавач</b>
+          <p id="adusrnm">{{ad.find_user_name(ad.user_id)}}</p>
+          <br>
+          <b>Име на продукт:</b>
+          <p>{{ad.name_ad}}</p>
+          <br>
+          <b>Информация:</b>
+          <p>{{ad.info_ad}}</p>
+          <br>
+          <b>Цена:</b>
+          <p>{{ad.price}} leva</p>
+          <br>
+          <p>{{ad.date}}</p>
+          <br>
+          {%if ad.find_user_name(ad.user_id) != user.name%}
+          <button type="button" name="button">BUY</button>
+          {%endif%}
+          {%if ad.find_user_name(ad.user_id) == user.name%}
+          <button type="button" name="button">EDIT</button>
+          <form class="" action="/{{ad.id_ad}}/delete" method="post">
+            <button type="submit" name="button">DELETE</button>
+          </form>
+
+          {%endif%}
+        </div>
+        {%endfor%}
+
+    </body>
+</html>

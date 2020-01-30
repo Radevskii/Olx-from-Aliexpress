@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style_register.css')}}" />
+    </head>
+
+    <body>
+        <form action="/register", method="POST">
+            <div>
+              <h1>Register</h1>
+              <p>Please fill in this form to create an account.</p>
+              <hr>
+
+                <label><b>Email</b></label>
+                <br>
+                <input type="text" placeholder="Enter Email" name="email">
+                <br>
+                <label><b>Username</b></label>
+                <br>
+                <input type="text" placeholder="Enter Username" name="name">
+                <br>
+                <label><b>Phone Number</b></label>
+                <br>
+                <input type="number" placeholder="Enter Phone number" name="phone_number">
+                <br>
+                <label><b>Address</b></label>
+                <br>
+                <input type="text" placeholder="Enter Username" name="address">
+                <br>
+                <label><b>Password</b></label>
+                <br>
+                <input type="password" placeholder="Enter Password" name="password">
+              <hr>
+              <button type="submit" class="registerbtn" value="Submit">Register</button>
+            </div>
+          </form>
+    </body>
+</html>

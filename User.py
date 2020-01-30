@@ -1,6 +1,7 @@
 from database import DB
 import hashlib
 
+
 class user:
     def __init__(self, id, name, email, password, phone_number, address):
         self.id = id
@@ -31,6 +32,7 @@ class user:
 
     @staticmethod
     def get_user(id):
+
         with DB() as db:
             values = db.execute(
                 '''
@@ -43,7 +45,6 @@ class user:
 
     @staticmethod
     def get_user_id(mail):
-        id = 0
         with DB() as db:
             id = db.execute(
                 '''

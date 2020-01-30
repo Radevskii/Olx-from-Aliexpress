@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            button {
+                background-color: rgba(214,32,15,0.4);
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 25%;
+                border-radius: 100%;
+                border-style: outset;
+            }
+
+            button:hover {
+                opacity: 0.8;
+
+            }
+            div
+            {
+                background-color:rgba(0,50,100,0.4);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            {%if user == None%}
+            <h1 style="text-align: center;">Welcome</h1>
+            {%endif%}
+            {% if user!=None %}
+            <h1 style="text-align: center;">Hi, {{ user.name }}!</h1>
+            {%endif%}
+            {% if user == None %}
+            <p style="text-align: center;"><button onclick="location.href = '/login'">Login</button></p>
+            {%endif%}
+            {%if user==None%}
+            <p style="text-align: center;"><button onclick="location.href = '/register'">Register</button></p>
+            {%endif%}
+            {%if user != None%}
+            <p style="text-align: center;"><button onclick="location.href = '/'">Log out</button></p>
+            <p style="text-align: center;"><button onclick="location.href = '/{{user.id}}/new_ad/'">Add ad</button></p>
+            {%endif%}
+        </div>
+
+        {%for ad in ads %}
+        <table>
+          <p>{{ad.name_ad}}</p>
+          <br>
+          <p>{{ad.info_ad}}</p>
+          <br>
+          <p>{{ad.price}}</p>
+        </table>
+        {%endfor%}
+
+    </body>
+</html>

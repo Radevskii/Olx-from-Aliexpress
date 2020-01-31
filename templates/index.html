@@ -42,11 +42,17 @@
           <br>
           <p>{{ad.date}}</p>
           <br>
+          {%if ad.is_active==1%}
+          <p> Активна</p>
+          {%endif%}
+          {%if ad.is_active==0%}
+          <p>Неактивна</p>
+          {%endif%}
           {%if ad.find_user_name(ad.user_id) != user.name%}
           <button type="button" name="button">BUY</button>
           {%endif%}
           {%if ad.find_user_name(ad.user_id) == user.name%}
-          <button type="button" name="button">EDIT</button>
+          <button type="button" name="button" onclick="location.href = '/{{user.id}}/edit_ad/{{ad.id_ad}}/'">EDIT</button>
           <form class="" action="/{{ad.id_ad}}/delete" method="post">
             <button type="submit" name="button">DELETE</button>
           </form>

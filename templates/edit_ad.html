@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style_newad.css')}} "/>
+    </head>
+
+    <body>
+        <form action="/{{user.id}}/edit_ad/{{ad.id_ad}}/", method="POST">
+            <div class="container">
+              <p>Please fill out the following form to edit your ad(if you want).</p>
+              <hr>
+              <label><b>Name of the product</b></label>
+              <br>
+              <input type="text" placeholder="Enter Name" name="name_ad">
+              <br>
+              <label><b>Info</b></label>
+              <br>
+              <input type="text" placeholder="Enter info(simple pl0x)" name = "info_ad">
+              <br>
+              <label><b>Price</b></label>
+              <br>
+              <input type="number" placeholder="Enter info(simple pl0x)" name = "price">
+              <br>
+              <hr>
+              <button type="submit" class="registerbtn" value="Submit">Edit</button>
+            </div>
+        </form>
+    </body>
+</html>

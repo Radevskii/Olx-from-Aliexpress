@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 
 from User import user
 from ad import ad
@@ -71,6 +71,15 @@ def edit_ads(id, id_ad):
         return redirect('/{}/'.format(id))
 
 
+@app.route("/<int:id>/my_ads/")
+def my_ads(id):
+    User_name = user.get_user(id)
+    print(User_name)
+    return render_template("my_ads.html", user=User_name, ads = ad.all())
+
+    return redirect('/')
+
+
 @app.route('/<int:id>/delete', methods=['POST'])
 def delete_post(id):
     post = ad.find(id)
@@ -78,9 +87,6 @@ def delete_post(id):
     post.delete()
 
     return render_template("index.html", user=User_name, ads = ad.all())
-
-
-
 
 
 @app.route("/<int:id>/")

@@ -1,5 +1,6 @@
 from database import DB
 from datetime import date
+from User import user
 
 
 class ad:
@@ -21,7 +22,6 @@ class ad:
         self.editing = (
              self.name_ad, self.info_ad, self.price, self.id_ad
         )
-
 
     def add_ad(self):
         with DB() as db:
@@ -71,7 +71,32 @@ class ad:
                 (user_id,)).fetchone()
         return name[0]
 
-
     def delete(self):
         with DB() as db:
             db.execute('DELETE FROM ads WHERE id_ad = ?', (self.id_ad, ))
+
+    def buy(self, buyer):
+        with DB() as db:
+            values = (buyer, self.id_ad)
+            db.execute('''UPDATE ad SET active = 0, buyer_id = ? WHERE id_ad = ?''', values)
+            self.is_active = 0
+            self.buyer= buyer
+            return self
+
+    @staticmethod
+    def buyer_name_by_id(buyer):
+        with DB() as db:
+            name = db.execute(
+                'SELECT name FROM users WHERE id = ?',
+                (buyer,)
+            ).fetchone()
+            return name[0]
+
+    @staticmethod
+    def buyer_info_by_id(buyer):
+        with DB() as db:
+            row = db.execute(
+                'SELECT * FROM users WHERE id = ?',
+                (buyer,)
+            ).fetchone()
+            return user(*row)

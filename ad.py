@@ -19,7 +19,7 @@ class ad:
         )
 
         self.editing = (
-             self.name_ad, self.info_ad, self.price
+             self.name_ad, self.info_ad, self.price, self.id_ad
         )
 
 
@@ -38,7 +38,8 @@ class ad:
         with DB() as db:
             db.execute(
                 '''
-                    UPDATE ads SET name_ad = ?, info_ad = ?, price = ? 
+                    UPDATE ads SET name_ad = ?, info_ad = ?, price = ?
+                    WHERE id_ad = ? 
                 ''', self.editing
             )
             return self

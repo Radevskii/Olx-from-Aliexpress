@@ -55,13 +55,13 @@ def add_ad(id):
         return redirect('/{}/'.format(id))
 
 
-@app.route('/<int:id>/edit_ad/', methods=['GET', 'POST'])
-def edit_ads(id):
+@app.route('/<int:id>/edit_ad/<int:id_ad>/', methods=['GET', 'POST'])
+def edit_ads(id, id_ad):
     if request.method == "GET":
-        return render_template("edit_ad.html", user=user.get_user(id))
+        return render_template("edit_ad.html", user=user.get_user(id), ad=ad.find(id_ad))
     elif request.method =="POST":
         values = (
-            None,
+            id_ad,
             request.form['name_ad'],
             request.form['info_ad'],
             request.form['price'],

@@ -71,14 +71,22 @@ def edit_ads(id, id_ad):
         return redirect('/{}/'.format(id))
 
 
-@app.route("/<int:id>/my_ads/")
-def my_ads(id):
+
+
+@app.route("/<int:id>/my_ads/", methods = ['GET'])
+def my_sold_ads(id):
+    return render_template("my_ads.html", user = user.get_user(id), ad = ad.all())
+
+@app.route("/buy/<int:id_ad>/")
+def buy_ad(id_ad):
+    ad(id_ad, None, None, None, None, None, None).add_bought_ads()
+    return redirect('/{}/'.format(id))
+
+@app.route("/<int:id>/")
+def print_hello(id):
     User_name = user.get_user(id)
     print(User_name)
-    return render_template("my_ads.html", user=User_name, ads = ad.all())
-
-    return redirect('/')
-
+    return render_template("index.html", user=User_name, ads = ad.all())
 
 @app.route('/<int:id>/delete', methods=['POST'])
 def delete_post(id):
@@ -86,14 +94,9 @@ def delete_post(id):
     User_name = user.get_user(post.user_id)
     post.delete()
 
-    return render_template("index.html", user=User_name, ads = ad.all())
+    return render_template("index.html", user=User_name, ad = ad.all())
 
 
-@app.route("/<int:id>/")
-def print_hello(id):
-    User_name = user.get_user(id)
-    print(User_name)
-    return render_template("index.html", user=User_name, ads = ad.all())
 
 
 if __name__ == "__main__":

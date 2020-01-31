@@ -4,7 +4,7 @@
         <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style_index.css')}}" />
     </head>
 
-    <body>
+    <body class="body">
 
         <div class="info">
             <div>
@@ -30,6 +30,7 @@
 
         {%for ad in ads %}
         {% if ad.is_active == 1 %}
+
         <div class="info">
           <br>
           <b>Продавач</b>
@@ -53,15 +54,15 @@
           <p>Неактивна</p>
           {%endif%}
           {%if ad.find_user_name(ad.user_id) != user.name%}
-
-          <button type="button" name="button">BUY</button>
+          <form class="buy" action="/buy/{{ad.id_ad}}/">
+              <button type="submit" value="submit">Buy</button>
+          </form>
           {%endif%}
           {%if ad.find_user_name(ad.user_id) == user.name%}
           <button type="button" name="button" onclick="location.href = '/{{user.id}}/edit_ad/{{ad.id_ad}}/'">EDIT</button>
           <form class="" action="/{{ad.id_ad}}/delete" method="post">
             <button type="submit" name="button">DELETE</button>
           </form>
-
           {%endif%}
         </div>
         {% endif %}

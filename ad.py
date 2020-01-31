@@ -1,6 +1,6 @@
 from database import DB
 from datetime import date
-from User import user
+
 
 
 class ad:
@@ -59,7 +59,6 @@ class ad:
             rows = db.execute('SELECT * FROM ads').fetchall()
             return [ad(*row) for row in rows]
 
-
     @staticmethod
     def find_user_name(user_id):
         with DB() as db:
@@ -71,8 +70,30 @@ class ad:
                 (user_id,)).fetchone()
         return name[0]
 
+    @staticmethod
+    def find_buyer(buyer):
+        with DB() as db:
+            user = db.execute(
+                '''
+                SELECT * FROM users
+                WHERE id = ?
+                ''', (buyer,)).fetchone()
+            return user
+
+    def add_bought_ads(self):
+        with DB() as db:
+            buyer = (
+                self.buyer,
+                self.id_ad
+
+            )
+            db.execute('''
+                        UPDATE ads SET buyer = ?, is_active = 0
+                         WHERE id_ad = ?''', buyer)
+            return self
+
     def delete(self):
         with DB() as db:
             db.execute('DELETE FROM ads WHERE id_ad = ?', (self.id_ad, ))
 
-    
+
